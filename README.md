@@ -29,9 +29,9 @@
 	
      
 1. Functionality
-  1. Logged in user can view the school data and can search the data. 
-  1. User who has rights to "add_school_data" can add the school data.
-  1. User who has rights to "update" can edit/delete the school data.
+   1. Logged in user can view the school data and can search the data. 
+   1. User who has rights to "add_school_data" can add the school data.
+   1. User who has rights to "update" can edit/delete the school data.
 	
 1. Non-functional requirement
    1. Data is persisting in the Database  (School table)
@@ -51,7 +51,7 @@
        That is why we need to click on "School portlet" page to initiate the permission properly..
 	   
 1. Pending task.
-    1. Unit test cases.
+   1. Unit test cases.
 
 
 
