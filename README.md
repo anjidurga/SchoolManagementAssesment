@@ -5,15 +5,15 @@
    1. Mysql- 5.7.20
    1. Liferay workspace with Gradle build tool. 	
 		
-1. Deploy the components    
-   1. Clone the Liferay workspace from the git location 
+1. Setup Liferay workspace 
+   1. Clone the Liferay workspace 
    1. Import the LW into LDS or any editor.
    1. Change the server path in gradle.properties.
    1. Run the deploy task.
 	
 1. Deploy the components
-   1. Downlod the jar from folder "Step_1-jars", then copy the jars into deploy folder
-   1. Downlod the jar from folder "Step_2-jars", then copy the jar into deploy folder.
+   1. Downlod the jar from folder "Step_1-jars", then copy the jars into "Deploy" folder
+   1. Downlod the jar from folder "Step_2-jars", then copy the jar into "Deploy" folder.
 	
 1. Liferay admininstration setup.    
    1. Login to liferay with admin user.
