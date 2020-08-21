@@ -15,17 +15,17 @@
    1.Downlod the jar from folder "Step_1-jars", then copy the jars into deploy folder
    1.Downlod the jar from folder "Step_2-jars", then copy the jar into deploy folder.
 	
- 1.Liferay admininstration setup.    
-   1.Login to liferay with admin user.
-   1.Verify whether site-template and role has been created from the upgrade process.
-   1.For that, Go-to Site --> Site Templates . Check School Management Site template exist.
-   1.Go-to Roles --> Regular role. Check whether role "school_mng_admin" created. If yes, select the "school_mng_admin" and check the "define permission" for that role.
+1. Liferay admininstration setup.    
+   1. Login to liferay with admin user.
+   1. Verify whether site-template and role has been created from the upgrade process.
+   1. For that, Go-to Site --> Site Templates . Check School Management Site template exist.
+   1. Go-to Roles --> Regular role. Check whether role "school_mng_admin" created. If yes, select the "school_mng_admin" and check the "define permission" for that role.
 	   This role should have access to "school-web-portlet".
-   1.Go-to Sites --> Sites --> Verify whether "School Management" Site created.   
+   1. Go-to Sites --> Sites --> Verify whether "School Management" Site created.   
    1. Acess the url http://localhost:8089/web/school-management/school-portlet  (To initiate all permission control : Note: "This page is not require, it is just for one time activity")	
-   1.Access the url http://localhost:8089/web/school-management/school-data
-   1.Create a user and assign to role "schoolmng_admin".	
-   1.Perform CRUD operation in "School Data" page. 
+   1. Access the url http://localhost:8089/web/school-management/school-data
+   1. Create a user and assign to role "schoolmng_admin".	
+   1. Perform CRUD operation in "School Data" page. 
 	
      
 1.Functionality
