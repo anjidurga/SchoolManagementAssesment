@@ -1,12 +1,11 @@
 package com.liferay.schoolmng.content.setup.upgrade;
 
+import com.liferay.management.content.setup.upgrade.v1_0_0.AddSiteTemplateSites;
+import com.liferay.management.content.setup.upgrade.v1_0_0.CreateRoleAndDefinePermission;
+import com.liferay.management.content.setup.upgrade.v1_0_0.CreateSiteFromSiteTemplate;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
-
-import com.scl.management.content.setup.upgrade.v1_0_0.AddSiteTemplateSites;
-import com.scl.management.content.setup.upgrade.v1_0_0.CreateRoleAndDefinePermission;
-import com.scl.management.content.setup.upgrade.v1_0_0.CreateSiteFromSiteTemplate;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -26,16 +25,16 @@ public class SchoolManagementSetupUpgrade implements UpgradeStepRegistrator {
 		_log.info("Started School upgrade process.");
 		}
 
-		registry.register("1.0.2", "1.0.3", new AddSiteTemplateSites());
+		registry.register("0.0.0", "1.0.0", new AddSiteTemplateSites());
 
 		
 		registry.register(
-				"1.0.3", "1.0.4",
+				"1.0.0", "1.0.1",
 				new CreateRoleAndDefinePermission("school_mng_admin"));
 
 				
 		registry.register(
-				"1.0.4", "1.0.5",
+				"1.0.1", "1.0.2",
 				new CreateSiteFromSiteTemplate("School Management"));
 		
 		
