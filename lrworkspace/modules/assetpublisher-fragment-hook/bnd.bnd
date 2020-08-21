@@ -1,0 +1,4 @@
+Bundle-Name: assetpublisher-fragment-hook
+Bundle-SymbolicName: assetpublisher.fragment.hook
+Bundle-Version: 1.0.0
+Fragment-Host: com.liferay.asset.publisher.web;bundle-version="2.0.6"

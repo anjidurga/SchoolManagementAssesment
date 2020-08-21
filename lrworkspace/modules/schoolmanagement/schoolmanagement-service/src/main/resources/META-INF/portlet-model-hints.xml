@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.liferay.schoolmng.school.model.SchoolData">
+		<field name="uuid" type="String" />
+		<field name="schoolId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="schoolName" type="String" />
+		<field name="schoolType" type="String" />
+		<field name="city" type="String" />
+		<field name="noOfStudents" type="int" />
+		<field name="rating" type="int" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+	</model>
+</model-hints>

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+
+<service-builder package-path="com.liferay.schoolmng.school">
+	<author>Anjaneya</author>
+	<namespace>schoolmng</namespace>
+	<!--<entity data-source="sampleDataSource" local-service="true" name="Foo" remote-service="false" session-factory="sampleSessionFactory" table="foo" tx-manager="sampleTransactionManager uuid="true"">-->
+	<entity local-service="true" name="SchoolData" remote-service="true" table="School" uuid="true">
+
+		<!-- PK fields -->
+
+		<column name="schoolId" primary="true" type="long" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long"></column>
+
+		<!-- School information -->
+
+		<column name="schoolName" type="String" />
+		<column name="schoolType" type="String" />
+		<column name="city" type="String" />
+		<column name="noOfStudents" type="int" />
+		<column name="rating" type="int" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="schoolName" order-by="asc" />
+		</order>
+
+		<!-- References -->
+
+		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset"></reference>
+		<reference entity="AssetLink" package-path="com.liferay.portlet.asset"></reference>
+		<reference entity="AssetTag" package-path="com.liferay.portlet.asset"></reference>
+
+	</entity>
+</service-builder>

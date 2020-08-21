@@ -1,0 +1,11 @@
+Bundle-Name: schoolmanagement-api
+Bundle-SymbolicName: com.liferay.schoolmng.school.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.liferay.schoolmng.school.exception,\
+	com.liferay.schoolmng.school.model,\
+	com.liferay.schoolmng.school.service,\
+	com.liferay.schoolmng.school.service.permission,\
+	com.liferay.schoolmng.school.service.persistence
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../schoolmanagement-service/service.xml

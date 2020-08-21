@@ -1,0 +1,199 @@
+<%--
+/**
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+--%>
+
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.liferay.schoolmng.school.model.SchoolData"%>
+<%@page import="com.liferay.portal.kernel.search.SearchContext"%>
+<%@page import="com.liferay.portal.kernel.search.SortFactoryUtil"%>
+<%@page import="com.liferay.portal.kernel.search.Sort"%>
+<%@page import="com.liferay.portal.kernel.search.SortFactoryUtil"%>
+<%@page import="com.liferay.portal.kernel.search.Field"%>
+<%@page import="com.liferay.portal.kernel.service.ServiceContext"%>
+<%@page import="com.liferay.portal.kernel.service.ServiceContextFactory"%>
+<%@page import="com.liferay.portal.kernel.search.Indexer"%>
+<%@page import="com.liferay.portal.kernel.search.IndexerRegistryUtil"%>
+<%@page import="com.liferay.portal.kernel.search.Hits"%>
+<%@page import="com.liferay.portal.kernel.search.Document"%>
+<%@page import="com.liferay.portal.kernel.util.GetterUtil"%>
+<%@page import="com.liferay.asset.kernel.service.AssetEntryLocalServiceUtil"%>
+
+<%  
+ 	String SCHOOL_NAME ="schoolName";
+	String SCHOOL_TYPE ="schoolType";
+	String CITY_NAME ="cityName";
+	String NO_OF_STUDENTS ="noOfStudents";
+	String RATING ="rating";
+	
+	// List<AssetEntryResult> assetEntryResults = AssetPublisherUtil.getAssetEntryResults(assetPublisherDisplayContext, searchContainer, portletPreferences);
+		 
+	// Get search parameters
+	
+	String schoolName = ParamUtil.getString(renderRequest, SCHOOL_NAME);
+	String schoolType = ParamUtil.getString(renderRequest, SCHOOL_TYPE);
+	String cityName = ParamUtil.getString(renderRequest, CITY_NAME);
+	String noOfStudetnts = ParamUtil.getString(renderRequest, NO_OF_STUDENTS);
+	String rating = ParamUtil.getString(renderRequest, RATING);
+	
+	
+	_log.debug("in view dynamic jsp : Search parameters are "+
+			"cityName [" + cityName + " ] schoolName [" + schoolName +" ] School Type ["+schoolType +" ]"+
+			"noOfStudetnts [" + noOfStudetnts + " ] rating [" + rating +" ]" );
+	
+ 
+	// Start Search 
+
+	int asset_currentPage = SearchContainer.DEFAULT_CUR;
+	int asset_delta = assetPublisherDisplayContext.getDelta();
+
+	if (!Validator.isBlank(renderRequest.getParameter(SearchContainer.DEFAULT_CUR_PARAM))) {
+		asset_currentPage = GetterUtil
+				.getInteger(renderRequest.getParameter(SearchContainer.DEFAULT_CUR_PARAM));
+	}
+
+	int asset_end = asset_currentPage * asset_delta;
+	int asset_start = asset_end - asset_delta;	
+		
+	// Indexer search for School data.
+	
+	SearchContext searchContext = new SearchContext();
+	searchContext.setCompanyId(themeDisplay.getCompanyId());
+	searchContext.setStart(asset_start);
+	searchContext.setEnd(asset_end);
+	String[] entryCalssName = { SchoolData.class.getName() };
+	searchContext.setEntryClassNames(entryCalssName);
+	Sort sort = SortFactoryUtil.create(Field.ENTRY_CLASS_NAME, Sort.STRING_TYPE, false);
+	searchContext.setSorts(sort);
+
+	ServiceContext serviceContext = ServiceContextFactory.getInstance(SchoolData.class.getName(),
+			renderRequest);
+	
+	// set the search parameters for Indexer.
+	
+	searchContext.setAttribute(SCHOOL_NAME, schoolName);
+	searchContext.setAttribute(SCHOOL_TYPE, schoolType);
+	searchContext.setAttribute(CITY_NAME, cityName);
+	searchContext.setAttribute(NO_OF_STUDENTS, noOfStudetnts);
+	searchContext.setAttribute(RATING, rating);
+	
+	Indexer<SchoolData> indexer = IndexerRegistryUtil.getIndexer(SchoolData.class.getName());
+
+	Hits hits = indexer.search(searchContext);
+	List<AssetEntry> school_assetEntriesLst = new ArrayList<AssetEntry>();
+	AssetEntry school_assetEntry = null;
+	
+	for (Document doc : hits.getDocs()) {
+		try {
+			school_assetEntry = AssetEntryLocalServiceUtil.getEntry(SchoolData.class.getName(),
+					GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK)));
+			school_assetEntriesLst.add(school_assetEntry);
+			//System.out.println("View_dynamic_list.jspf : Indexer result " +GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK)));
+		} catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+	searchContainer.setTotal(school_assetEntriesLst.size()+1);
+	// End Indexer search for School Data
+	//for (AssetEntryResult assetEntryResult : assetEntryResults) {
+    List<AssetEntry> assetEntries = school_assetEntriesLst ;// assetEntryResult.getAssetEntries();
+		
+%>
+
+	
+<!-- Search Form -->
+<liferay-portlet:renderURL varImpl="searchURL">
+    
+</liferay-portlet:renderURL>
+<aui:form action="<%= searchURL %>" method="get" name="fm">
+    <liferay-portlet:renderURLParams varImpl="searchURL" />
+
+    <div class="search-form">
+        <span class="aui-search-bar">
+            <aui:input inlineField="<%= true %>" label="schoolmng.schoolname" 
+            name="schoolName" size="20" title="School Name" type="text"
+            />
+			
+			<aui:input inlineField="<%= true %>" label="schoolmng.schooltype" 
+            name="schoolType" size="20" title="School Type" type="text"
+            />
+			
+			<aui:input inlineField="<%= true %>" label="schoolmng.cityName" 
+            name="cityName" size="20" title="City Name" type="text"
+            />
+			
+			<aui:input inlineField="<%= true %>" label="schoolmng.noOfStudents" 
+            name="noOfStudents" size="20" title="Number of Students" type="text"
+            />
+			
+			<aui:input inlineField="<%= true %>" label="schoolmng.rating" 
+            name="rating" size="30" title="Rating" type="text"
+            />
+            <aui:button type="submit" value="search" />
+        </span>
+    </div>
+</aui:form>
+
+<br><br>
+
+	<liferay-ddm:template-renderer
+		className="<%= AssetEntry.class.getName() %>"
+		displayStyle="<%= assetPublisherDisplayContext.getDisplayStyle() %>"
+		displayStyleGroupId="<%= assetPublisherDisplayContext.getDisplayStyleGroupId() %>"
+		entries="<%= assetEntries %>"
+	>
+
+		<%
+		request.setAttribute("view.jsp-results", assetEntries);
+		%>
+
+	<%@ include file="/view_dynamic_list_asset.jspf"%>
+</liferay-ddm:template-renderer>
+
+<%
+//}
+%>
+
+<c:if test="<%= school_assetEntriesLst.isEmpty() %>">
+	<liferay-ddm:template-renderer
+		className="<%= AssetEntry.class.getName() %>"
+		displayStyle="<%= assetPublisherDisplayContext.getDisplayStyle() %>"
+		displayStyleGroupId="<%= assetPublisherDisplayContext.getDisplayStyleGroupId() %>"
+		entries="<%= new ArrayList<AssetEntry>() %>"
+	>
+
+		<%
+		Map<Long, List<AssetPublisherAddItemHolder>> scopeAssetPublisherAddItemHolders = assetPublisherDisplayContext.getScopeAssetPublisherAddItemHolders(1);
+		%>
+
+		<c:if test="<%= MapUtil.isEmpty(scopeAssetPublisherAddItemHolders) && !((assetCategoryId > 0) || Validator.isNotNull(assetTagName)) %>">
+
+			<%
+			renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
+			%>
+
+		</c:if>
+
+		<div class="alert alert-info">
+			<c:choose>
+				<c:when test="<%= !portletName.equals(AssetPublisherPortletKeys.RELATED_ASSETS) %>">
+					<liferay-ui:message key="there-are-no-results" />
+				</c:when>
+				<c:otherwise>
+					<liferay-ui:message key="there-are-no-related-assets" />
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</liferay-ddm:template-renderer>
+</c:if>
