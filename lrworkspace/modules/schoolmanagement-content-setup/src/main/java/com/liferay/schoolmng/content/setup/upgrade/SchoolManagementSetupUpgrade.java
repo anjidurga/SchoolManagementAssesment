@@ -1,11 +1,11 @@
 package com.liferay.schoolmng.content.setup.upgrade;
 
-import com.liferay.management.content.setup.upgrade.v1_0_0.AddSiteTemplateSites;
-import com.liferay.management.content.setup.upgrade.v1_0_0.CreateRoleAndDefinePermission;
-import com.liferay.management.content.setup.upgrade.v1_0_0.CreateSiteFromSiteTemplate;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
+import com.liferay.schoolmng.content.setup.upgrade.v1_0_0.AddSiteTemplateSites;
+import com.liferay.schoolmng.content.setup.upgrade.v1_0_0.CreateRoleAndDefinePermission;
+import com.liferay.schoolmng.content.setup.upgrade.v1_0_0.CreateSiteFromSiteTemplate;
 
 import org.osgi.service.component.annotations.Component;
 

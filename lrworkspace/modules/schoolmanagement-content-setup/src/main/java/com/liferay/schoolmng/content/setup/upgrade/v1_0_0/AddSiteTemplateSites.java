@@ -1,4 +1,4 @@
-package com.liferay.management.content.setup.upgrade.v1_0_0;
+package com.liferay.schoolmng.content.setup.upgrade.v1_0_0;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
