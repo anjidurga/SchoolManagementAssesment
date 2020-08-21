@@ -11,7 +11,7 @@
    1. Change the server path in gradle.properties.
    1. Run the deploy task.
 	
-1. Deploy the components
+1. Deploy the folloing components 
    1. Downlod the jar from folder "Step_1-jars", then copy the jars into "Deploy" folder
    1. Downlod the jar from folder "Step_2-jars", then copy the jar into "Deploy" folder.
 	
